@@ -103,7 +103,7 @@ func Description(value string, xes ...interface{}) *Element {
 	return StringElement(ElemDescription, value, xes...)
 }
 
-// Display mode valid values.
+// DisplayMode valid values.
 const (
 	DisplayModeDefault = "default"
 	DisplayModeHide    = "hide"

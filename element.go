@@ -18,8 +18,8 @@ type Element struct {
 	// If element has children it is nil.
 	content xml.CharData
 
-	// Offset from in bytes of the start of the element.
-	Offset int64
+	// Offset of the element from the the start of the file.
+	offset int64
 }
 
 // NewElement returns new instance of Element with name and adds child
@@ -49,6 +49,11 @@ func NewElement(name string, els ...interface{}) *Element {
 // LocalName returns XML element name.
 func (e *Element) LocalName() string {
 	return e.se.Name.Local
+}
+
+// Offset returns byte offset the element starts.
+func (e *Element) Offset() int64 {
+	return e.offset
 }
 
 // HasAttribute returns true if element has attribute.
@@ -166,10 +171,10 @@ func (e *Element) UnmarshalXML(dec *xml.Decoder, se xml.StartElement) error {
 		switch el := tok.(type) {
 		case xml.StartElement:
 			ch := NewElement(el.Name.Local)
+			ch.offset = off
 			if err := ch.UnmarshalXML(dec, el); err != nil {
 				return err
 			}
-			ch.Offset = off
 			e.children = append(e.children, ch)
 		case xml.CharData:
 			e.content = bytes.TrimSpace(el.Copy())
