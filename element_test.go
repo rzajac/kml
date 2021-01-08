@@ -17,7 +17,6 @@ func Test_Element_Unmarshal_Marshal(t *testing.T) {
 	root := KML()
 	assert.NoError(t, xml.Unmarshal(data, root))
 
-
 	buf := &bytes.Buffer{}
 	enc := xml.NewEncoder(buf)
 	enc.Indent("", "  ")
