@@ -18,6 +18,7 @@ const (
 	ElemData          = "data"
 	ElemDescription   = "description"
 	ElemDisplayMode   = "displayMode"
+	ElemDisplayName   = "displayName"
 	ElemDocument      = "Document"
 	ElemExtendedData  = "ExtendedData"
 	ElemFolder        = "Folder"
@@ -114,6 +115,11 @@ const (
 	DisplayModeDefault = "default"
 	DisplayModeHide    = "hide"
 )
+
+// DisplayName returns new displayName element.
+func DisplayName(value string, xes ...interface{}) *Element {
+	return StringElement(ElemDisplayName, value, xes...)
+}
 
 // DisplayMode returns new displayMode element.
 func DisplayMode(value string, xes ...interface{}) *Element {

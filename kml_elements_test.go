@@ -23,6 +23,7 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		{kml.Coordinates("0.1,0.2,0.3 1.1,1.2,1.3"), `<coordinates>0.1,0.2,0.3 1.1,1.2,1.3</coordinates>`},
 		{kml.Data("name"), `<data name="name"></data>`},
 		{kml.Description("desc"), `<description>desc</description>`},
+		{kml.DisplayName("name"), `<displayName>name</displayName>`},
 		{kml.Document(), `<Document></Document>`},
 		{kml.ExtendedData(), `<ExtendedData></ExtendedData>`},
 		{kml.Folder(), `<Folder></Folder>`},
