@@ -3,6 +3,7 @@ package kml
 import (
 	"bytes"
 	"encoding/xml"
+	"errors"
 )
 
 // Element represents KML element and provides set of methods for easy
@@ -31,18 +32,9 @@ func NewElement(name string, els ...interface{}) *Element {
 			Name: xml.Name{Local: name},
 		},
 	}
-
-	for _, elm := range els {
-		switch el := elm.(type) {
-		case xml.Attr:
-			xel.SetAttribute(el)
-		case *Element:
-			xel.children = append(xel.children, el)
-		default:
-			panic("expected xml.Attr or *Element")
-		}
+	if err := xel.AddChild(els...); err != nil {
+		panic(err)
 	}
-
 	return xel
 }
 
@@ -128,6 +120,21 @@ func (e *Element) ChildByName(name string) *Element {
 // Children returns element's children.
 func (e *Element) Children() []*Element {
 	return e.children
+}
+
+// AddChild adds child element(s) to the element.
+func (e *Element) AddChild(els ...interface{}) error {
+	for _, elm := range els {
+		switch el := elm.(type) {
+		case xml.Attr:
+			e.SetAttribute(el)
+		case *Element:
+			e.children = append(e.children, el)
+		default:
+			return errors.New("expected xml.Attr or *Element")
+		}
+	}
+	return nil
 }
 
 // Content returns element's string content. It returns empty string if

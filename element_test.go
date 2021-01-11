@@ -52,3 +52,20 @@ func Test_Element_ChildByName_notExisting(t *testing.T) {
 	// --- Then ---
 	assert.Nil(t, fld)
 }
+
+func Test_Element_AddChild(t *testing.T) {
+	// --- Given ---
+	doc := Document()
+
+	// --- When ---
+	err := doc.AddChild(Name("name"), Description("desc"))
+
+	// --- Then ---
+	assert.NoError(t, err)
+
+	data, err := xml.Marshal(doc)
+	assert.NoError(t, err)
+
+	exp := `<Document><name>name</name><description>desc</description></Document>`
+	assert.Exactly(t, exp, string(data))
+}
