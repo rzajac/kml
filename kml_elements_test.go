@@ -38,7 +38,8 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		{kml.PolyStyle(), `<PolyStyle></PolyStyle>`},
 		{kml.Roll(1.234), `<roll>1.234</roll>`},
 		{kml.Scale(1.234), `<scale>1.234</scale>`},
-		{kml.Schema("name", "id"), `<Schema name="name" id="id"></Schema>`},
+		{kml.Schema("id", "name"), `<Schema name="name" id="id"></Schema>`},
+		{kml.SimpleField(kml.SFTypeString, "name"), `<SimpleField type="string" name="name"></SimpleField>`},
 		{kml.Snippet("value"), `<Snippet>value</Snippet>`},
 		{kml.Style(), `<Style></Style>`},
 		{kml.StyleURL("#value"), `<styleUrl>#value</styleUrl>`},
@@ -52,6 +53,37 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		t.Run(tc.elm.LocalName(), func(t *testing.T) {
 			// --- When ---
 			data, err := xml.Marshal(tc.elm)
+
+			// --- Then ---
+			assert.NoError(t, err)
+			assert.Exactly(t, tc.exp, string(data))
+		})
+	}
+}
+
+func Test_InPlaceElement_SimpleField(t *testing.T) {
+	tt := []struct {
+		typ  string
+		name string
+		exp  string
+	}{
+		{kml.SFTypeString, "name1", `<SimpleField type="string" name="name1"></SimpleField>`},
+		{kml.SFTypeInt, "name2", `<SimpleField type="int" name="name2"></SimpleField>`},
+		{kml.SFTypeUInt, "name3", `<SimpleField type="uint" name="name3"></SimpleField>`},
+		{kml.SFTypeShort, "name4", `<SimpleField type="short" name="name4"></SimpleField>`},
+		{kml.SFTypeUShort, "name5", `<SimpleField type="ushort" name="name5"></SimpleField>`},
+		{kml.SFTypeFloat, "name6", `<SimpleField type="float" name="name6"></SimpleField>`},
+		{kml.SFTypeDouble, "name7", `<SimpleField type="double" name="name7"></SimpleField>`},
+		{kml.SFTypeBool, "name8", `<SimpleField type="bool" name="name8"></SimpleField>`},
+	}
+
+	for _, tc := range tt {
+		t.Run(tc.typ, func(t *testing.T) {
+			// --- Given ---
+			k := kml.SimpleField(tc.typ, tc.name)
+
+			// --- When ---
+			data, err := xml.Marshal(k)
 
 			// --- Then ---
 			assert.NoError(t, err)

@@ -34,6 +34,7 @@ const (
 	ElemRoll          = "roll"
 	ElemScale         = "scale"
 	ElemSchema        = "Schema"
+	ElemSimpleField   = "SimpleField"
 	ElemSnippet       = "Snippet"
 	ElemStyle         = "Style"
 	ElemStyleURL      = "styleUrl"
@@ -259,13 +260,37 @@ func Scale(value float64, xes ...interface{}) *Element {
 }
 
 // Schema returns new Schema element.
-func Schema(name, id string, xes ...interface{}) *Element {
+func Schema(id, name string, xes ...interface{}) *Element {
 	attrs := []interface{}{
 		Attr("name", name),
 		Attr("id", id),
 	}
 	return NewElement(
 		ElemSchema,
+		append(attrs, xes...)...,
+	)
+}
+
+// SimpleField valid types.
+const (
+	SFTypeString = "string"
+	SFTypeInt    = "int"
+	SFTypeUInt   = "uint"
+	SFTypeShort  = "short"
+	SFTypeUShort = "ushort"
+	SFTypeFloat  = "float"
+	SFTypeDouble = "double"
+	SFTypeBool   = "bool"
+)
+
+// SimpleField returns new SimpleField element.
+func SimpleField(typ, name string, xes ...interface{}) *Element {
+	attrs := []interface{}{
+		Attr("type", typ),
+		Attr("name", name),
+	}
+	return NewElement(
+		ElemSimpleField,
 		append(attrs, xes...)...,
 	)
 }
