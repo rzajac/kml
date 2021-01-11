@@ -36,6 +36,7 @@ const (
 	ElemRoll          = "roll"
 	ElemScale         = "scale"
 	ElemSchema        = "Schema"
+	ElemSchemaData    = "SchemaData"
 	ElemSimpleField   = "SimpleField"
 	ElemSnippet       = "Snippet"
 	ElemStyle         = "Style"
@@ -255,6 +256,17 @@ func Schema(id, name string, xes ...interface{}) *Element {
 	}
 	return NewElement(
 		ElemSchema,
+		append(attrs, xes...)...,
+	)
+}
+
+// SchemaData returns new SchemaData element.
+func SchemaData(schemaURL string, xes ...interface{}) *Element {
+	attrs := []interface{}{
+		Attr("schemaUrl", schemaURL),
+	}
+	return NewElement(
+		ElemSchemaData,
 		append(attrs, xes...)...,
 	)
 }

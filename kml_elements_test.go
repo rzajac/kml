@@ -39,6 +39,7 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		{kml.Roll(1.234), `<roll>1.234</roll>`},
 		{kml.Scale(1.234), `<scale>1.234</scale>`},
 		{kml.Schema("id", "name"), `<Schema name="name" id="id"></Schema>`},
+		{kml.SchemaData("#schema"), `<SchemaData schemaUrl="#schema"></SchemaData>`},
 		{kml.SimpleField(kml.SFTypeString, "name"), `<SimpleField type="string" name="name"></SimpleField>`},
 		{kml.Snippet("value"), `<Snippet>value</Snippet>`},
 		{kml.Style(), `<Style></Style>`},
