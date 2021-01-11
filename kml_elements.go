@@ -5,6 +5,8 @@ import (
 	"strconv"
 )
 
+// Reference: https://developers.google.com/kml/documentation/kmlreference
+
 // KML element names.
 const (
 	ElemAltitudeMode  = "altitudeMode"
@@ -61,7 +63,6 @@ func AltitudeMode(value string, xes ...interface{}) *Element {
 // ----------------------------------- B ---------------------------------------
 
 // BalloonStyle returns new BalloonStyle element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#balloonstyle
 func BalloonStyle(xes ...interface{}) *Element {
 	return NewElement(ElemBalloonStyle, xes...)
 }
@@ -91,7 +92,6 @@ func Coordinates(value string, xes ...interface{}) *Element {
 // ----------------------------------- D ---------------------------------------
 
 // Data returns new data element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#extendeddata
 func Data(name string, xes ...interface{}) *Element {
 	attrs := []interface{}{
 		Attr("name", name),
@@ -103,7 +103,6 @@ func Data(name string, xes ...interface{}) *Element {
 }
 
 // Description returns new description element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#feature
 func Description(value string, xes ...interface{}) *Element {
 	return StringElement(ElemDescription, value, xes...)
 }
@@ -115,13 +114,11 @@ const (
 )
 
 // DisplayMode returns new displayMode element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#balloonstyle
 func DisplayMode(value string, xes ...interface{}) *Element {
 	return StringElement(ElemDisplayMode, value, xes...)
 }
 
 // Document returns new Document element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#document
 func Document(xes ...interface{}) *Element {
 	return NewElement(ElemDocument, xes...)
 }
@@ -129,7 +126,6 @@ func Document(xes ...interface{}) *Element {
 // ----------------------------------- E ---------------------------------------
 
 // ExtendedData returns new ExtendedData element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#extendeddata
 func ExtendedData(xes ...interface{}) *Element {
 	return NewElement(ElemExtendedData, xes...)
 }
@@ -137,7 +133,6 @@ func ExtendedData(xes ...interface{}) *Element {
 // ----------------------------------- F ---------------------------------------
 
 // Folder returns new Folder element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#folder
 func Folder(xes ...interface{}) *Element {
 	return NewElement(ElemFolder, xes...)
 }
@@ -155,7 +150,6 @@ func Heading(value float64, xes ...interface{}) *Element {
 // ----------------------------------- K ---------------------------------------
 
 // KML returns a new kml element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#kml
 func KML(xes ...interface{}) *Element {
 	xel := NewElement("kml", xes...)
 	xel.se.Name.Space = "http://www.opengis.net/kml/2.2"
@@ -181,7 +175,6 @@ func KML(xes ...interface{}) *Element {
 // ----------------------------------- L ---------------------------------------
 
 // LabelStyle returns new LabelStyle element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#labelstyle
 func LabelStyle(xes ...interface{}) *Element {
 	return NewElement(ElemLabelStyle, xes...)
 }
@@ -192,13 +185,11 @@ func Latitude(value float64, xes ...interface{}) *Element {
 }
 
 // LineString returns new LineString element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#linestring
 func LineString(xes ...interface{}) *Element {
 	return NewElement(ElemLineString, xes...)
 }
 
 // LineStyle returns new LineStyle element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#linestyle
 func LineStyle(xes ...interface{}) *Element {
 	return NewElement(ElemLineStyle, xes...)
 }
@@ -211,7 +202,6 @@ func Longitude(value float64, xes ...interface{}) *Element {
 // ----------------------------------- M ---------------------------------------
 
 // MultiGeometry returns new MultiGeometry element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#multigeometry
 func MultiGeometry(xes ...interface{}) *Element {
 	return NewElement(ElemMultiGeometry, xes...)
 }
@@ -233,13 +223,11 @@ func Outline(value bool, xes ...interface{}) *Element {
 // ----------------------------------- P ---------------------------------------
 
 // Placemark returns new Placemark element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#placemark
 func Placemark(xes ...interface{}) *Element {
 	return NewElement(ElemPlacemark, xes...)
 }
 
 // PolyStyle returns new PolyStyle element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#polystyle
 func PolyStyle(xes ...interface{}) *Element {
 	return NewElement(ElemPolyStyle, xes...)
 }
@@ -301,7 +289,6 @@ func Snippet(value string, xes ...interface{}) *Element {
 }
 
 // Style returns new Style element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#style
 func Style(xes ...interface{}) *Element {
 	return NewElement(ElemStyle, xes...)
 }
@@ -319,7 +306,6 @@ func Tessellate(value bool, xes ...interface{}) *Element {
 }
 
 // Text returns new text element.
-// Reference: https://developers.google.com/kml/documentation/kmlreference#balloonstyle
 func Text(value string, xes ...interface{}) *Element {
 	return StringElement(ElemText, value, xes...)
 }
