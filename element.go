@@ -98,12 +98,7 @@ func (e *Element) SetAttribute(a xml.Attr) {
 
 // HasChild returns true if element has a child with local name.
 func (e *Element) HasChild(name string) bool {
-	for _, ch := range e.children {
-		if ch.se.Name.Local == name {
-			return true
-		}
-	}
-	return false
+	return e.ChildByName(name) != nil
 }
 
 // ChildCnt returns number of child elements of the element.
@@ -111,12 +106,23 @@ func (e *Element) ChildCnt() int {
 	return len(e.children)
 }
 
-// Child returns child element at idx. Returns nil if index is out of bounds.
-func (e *Element) Child(idx int) *Element {
+// ChildByIdx returns child element at idx. Returns nil if index is out of bounds.
+func (e *Element) ChildByIdx(idx int) *Element {
 	if idx >= len(e.children) || idx < 0 {
 		return nil
 	}
 	return e.children[idx]
+}
+
+// ChildByName returns child element by local name. Returns nil if child does
+// not exist.
+func (e *Element) ChildByName(name string) *Element {
+	for _, ch := range e.children {
+		if ch.se.Name.Local == name {
+			return ch
+		}
+	}
+	return nil
 }
 
 // Children returns element's children.
