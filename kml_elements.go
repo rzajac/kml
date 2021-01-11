@@ -33,6 +33,7 @@ const (
 	ElemPolyStyle     = "PolyStyle"
 	ElemRoll          = "roll"
 	ElemScale         = "scale"
+	ElemSchema        = "Schema"
 	ElemSnippet       = "Snippet"
 	ElemStyle         = "Style"
 	ElemStyleURL      = "styleUrl"
@@ -91,9 +92,12 @@ func Coordinates(value string, xes ...interface{}) *Element {
 // Data returns new data element.
 // Reference: https://developers.google.com/kml/documentation/kmlreference#extendeddata
 func Data(name string, xes ...interface{}) *Element {
+	attrs := []interface{}{
+		Attr("name", name),
+	}
 	return NewElement(
 		ElemData,
-		append([]interface{}{Attr("name", name)}, xes...)...,
+		append(attrs, xes...)...,
 	)
 }
 
@@ -252,6 +256,18 @@ func Roll(value float64, xes ...interface{}) *Element {
 // Scale returns new scale element.
 func Scale(value float64, xes ...interface{}) *Element {
 	return FloatElement(ElemScale, value, xes...)
+}
+
+// Schema returns new Schema element.
+func Schema(name, id string, xes ...interface{}) *Element {
+	attrs := []interface{}{
+		Attr("name", name),
+		Attr("id", id),
+	}
+	return NewElement(
+		ElemSchema,
+		append(attrs, xes...)...,
+	)
 }
 
 // Snippet returns new Snippet element.

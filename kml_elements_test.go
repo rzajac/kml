@@ -38,6 +38,7 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		{kml.PolyStyle(), `<PolyStyle></PolyStyle>`},
 		{kml.Roll(1.234), `<roll>1.234</roll>`},
 		{kml.Scale(1.234), `<scale>1.234</scale>`},
+		{kml.Schema("name", "id"), `<Schema name="name" id="id"></Schema>`},
 		{kml.Snippet("value"), `<Snippet>value</Snippet>`},
 		{kml.Style(), `<Style></Style>`},
 		{kml.StyleURL("#value"), `<styleUrl>#value</styleUrl>`},
