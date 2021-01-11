@@ -37,6 +37,7 @@ const (
 	ElemScale         = "scale"
 	ElemSchema        = "Schema"
 	ElemSchemaData    = "SchemaData"
+	ElemSimpleData    = "SimpleData"
 	ElemSimpleField   = "SimpleField"
 	ElemSnippet       = "Snippet"
 	ElemStyle         = "Style"
@@ -282,6 +283,18 @@ const (
 	SFTypeDouble = "double"
 	SFTypeBool   = "bool"
 )
+
+// SimpleData returns new SimpleData element.
+func SimpleData(name, value string, xes ...interface{}) *Element {
+	attrs := []interface{}{
+		Attr("name", name),
+	}
+	return StringElement(
+		ElemSimpleData,
+		value,
+		append(attrs, xes...)...,
+	)
+}
 
 // SimpleField returns new SimpleField element.
 func SimpleField(typ, name string, xes ...interface{}) *Element {
