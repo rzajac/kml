@@ -13,7 +13,7 @@ const (
 	ElemAltitudeMode  = "altitudeMode"
 	ElemBalloonStyle  = "BalloonStyle"
 	ElemBgColor       = "bgColor"
-	ElemCamera        = "camera"
+	ElemCamera        = "Camera"
 	ElemColor         = "color"
 	ElemCoordinates   = "coordinates"
 	ElemData          = "data"

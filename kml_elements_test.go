@@ -19,7 +19,7 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		{kml.Altitude(1.234), `<altitude>1.234</altitude>`},
 		{kml.BalloonStyle(), `<BalloonStyle></BalloonStyle>`},
 		{kml.BgColor("ffffffff"), `<bgColor>ffffffff</bgColor>`},
-		{kml.Camera(), `<camera></camera>`},
+		{kml.Camera(), `<Camera></Camera>`},
 		{kml.Color("ffffffff"), `<color>ffffffff</color>`},
 		{kml.Coordinates("0.1,0.2,0.3 1.1,1.2,1.3"), `<coordinates>0.1,0.2,0.3 1.1,1.2,1.3</coordinates>`},
 		{kml.Data("name"), `<data name="name"></data>`},
