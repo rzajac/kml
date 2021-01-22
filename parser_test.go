@@ -40,7 +40,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "http://www.w3.org/2005/Atom", root.Attribute("xmlns:atom").Value)
 
 	// kml > Document.
-	doc := root.ChildByIdx(0)
+	doc := root.ChildAtIdx(0)
 	assert.Exactly(t, ElemDocument, doc.LocalName())
 	assert.Exactly(t, int64(215), doc.Offset())
 	assert.Exactly(t, 0, doc.AttributeCnt())
@@ -50,7 +50,7 @@ func Test_Parse(t *testing.T) {
 	assert.True(t, doc.HasChild(ElemFolder))
 
 	// kml > Document > name.
-	name := doc.ChildByIdx(0)
+	name := doc.ChildAtIdx(0)
 	assert.Exactly(t, ElemName, name.LocalName())
 	assert.Exactly(t, int64(230), name.Offset())
 	assert.Exactly(t, 0, name.AttributeCnt())
@@ -58,7 +58,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "document name", name.Content())
 
 	// kml > Document > Style.
-	style := doc.ChildByIdx(1)
+	style := doc.ChildAtIdx(1)
 	assert.Exactly(t, ElemStyle, style.LocalName())
 	assert.Exactly(t, int64(261), style.Offset())
 	assert.Exactly(t, 1, style.AttributeCnt())
@@ -70,7 +70,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "sty_0", style.Attribute("id").Value)
 
 	// kml > Document > Style > LabelStyle.
-	labSty := style.ChildByIdx(0)
+	labSty := style.ChildAtIdx(0)
 	assert.Exactly(t, ElemLabelStyle, labSty.LocalName())
 	assert.Exactly(t, int64(286), labSty.Offset())
 	assert.Exactly(t, 0, labSty.AttributeCnt())
@@ -79,7 +79,7 @@ func Test_Parse(t *testing.T) {
 	assert.True(t, labSty.HasChild(ElemScale))
 
 	// kml > Document > Style > LabelStyle > color.
-	color := labSty.ChildByIdx(0)
+	color := labSty.ChildAtIdx(0)
 	assert.Exactly(t, ElemColor, color.LocalName())
 	assert.Exactly(t, int64(307), color.Offset())
 	assert.Exactly(t, 0, color.AttributeCnt())
@@ -87,7 +87,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "01020304", color.Content())
 
 	// kml > Document > Style > LabelStyle > scale.
-	scale := labSty.ChildByIdx(1)
+	scale := labSty.ChildAtIdx(1)
 	assert.Exactly(t, ElemScale, scale.LocalName())
 	assert.Exactly(t, int64(339), scale.Offset())
 	assert.Exactly(t, 0, scale.AttributeCnt())
@@ -95,7 +95,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "1", scale.Content())
 
 	// kml > Document > Style > LineStyle.
-	linSty := style.ChildByIdx(1)
+	linSty := style.ChildAtIdx(1)
 	assert.Exactly(t, ElemLineStyle, linSty.LocalName())
 	assert.Exactly(t, int64(382), linSty.Offset())
 	assert.Exactly(t, 0, linSty.AttributeCnt())
@@ -104,7 +104,7 @@ func Test_Parse(t *testing.T) {
 	assert.True(t, linSty.HasChild(ElemWidth))
 
 	// kml > Document > Style > LineStyle > color.
-	color = linSty.ChildByIdx(0)
+	color = linSty.ChildAtIdx(0)
 	assert.Exactly(t, ElemColor, color.LocalName())
 	assert.Exactly(t, int64(382), linSty.Offset())
 	assert.Exactly(t, 0, color.AttributeCnt())
@@ -112,7 +112,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "05060708", color.Content())
 
 	// kml > Document > Style > LineStyle > width.
-	width := linSty.ChildByIdx(1)
+	width := linSty.ChildAtIdx(1)
 	assert.Exactly(t, ElemWidth, width.LocalName())
 	assert.Exactly(t, int64(434), width.Offset())
 	assert.Exactly(t, 0, width.AttributeCnt())
@@ -120,7 +120,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "3.5", width.Content())
 
 	// kml > Document > Style > PolyStyle.
-	polSty := style.ChildByIdx(2)
+	polSty := style.ChildAtIdx(2)
 	assert.Exactly(t, ElemPolyStyle, polSty.LocalName())
 	assert.Exactly(t, int64(478), polSty.Offset())
 	assert.Exactly(t, 0, polSty.AttributeCnt())
@@ -129,7 +129,7 @@ func Test_Parse(t *testing.T) {
 	assert.True(t, polSty.HasChild(ElemOutline))
 
 	// kml > Document > Style > PolyStyle > color.
-	color = polSty.ChildByIdx(0)
+	color = polSty.ChildAtIdx(0)
 	assert.Exactly(t, ElemColor, color.LocalName())
 	assert.Exactly(t, int64(498), color.Offset())
 	assert.Exactly(t, 0, color.AttributeCnt())
@@ -137,7 +137,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "090a0b0c", color.Content())
 
 	// kml > Document > Style > PolyStyle > outline.
-	outline := polSty.ChildByIdx(1)
+	outline := polSty.ChildAtIdx(1)
 	assert.Exactly(t, ElemOutline, outline.LocalName())
 	assert.Exactly(t, int64(530), outline.Offset())
 	assert.Exactly(t, 0, outline.AttributeCnt())
@@ -145,7 +145,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "1", outline.Content())
 
 	// kml > Document > Folder.
-	folder := doc.ChildByIdx(2)
+	folder := doc.ChildAtIdx(2)
 	assert.Exactly(t, ElemFolder, folder.LocalName())
 	assert.Exactly(t, int64(587), folder.Offset())
 	assert.Exactly(t, 1, folder.AttributeCnt())
@@ -157,7 +157,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "fld_0", folder.Attribute("id").Value)
 
 	// kml > Document > Folder > name.
-	name = folder.ChildByIdx(0)
+	name = folder.ChildAtIdx(0)
 	assert.Exactly(t, ElemName, name.LocalName())
 	assert.Exactly(t, int64(613), name.Offset())
 	assert.Exactly(t, 0, name.AttributeCnt())
@@ -165,7 +165,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "folder name", name.Content())
 
 	// kml > Document > Folder > Snippet.
-	snippet := folder.ChildByIdx(1)
+	snippet := folder.ChildAtIdx(1)
 	assert.Exactly(t, ElemSnippet, snippet.LocalName())
 	assert.Exactly(t, int64(644), snippet.Offset())
 	assert.Exactly(t, 1, snippet.AttributeCnt())
@@ -175,7 +175,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "1", snippet.Attribute("maxLines").Value)
 
 	// kml > Document > Folder > Placemark
-	pm := folder.ChildByIdx(2)
+	pm := folder.ChildAtIdx(2)
 	assert.Exactly(t, ElemPlacemark, pm.LocalName())
 	assert.Exactly(t, int64(687), pm.Offset())
 	assert.Exactly(t, 1, pm.AttributeCnt())
@@ -183,7 +183,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, 4, pm.ChildCnt())
 
 	// kml > Document > Folder > Placemark > name.
-	name = pm.ChildByIdx(0)
+	name = pm.ChildAtIdx(0)
 	assert.Exactly(t, ElemName, name.LocalName())
 	assert.Exactly(t, int64(717), name.Offset())
 	assert.Exactly(t, 0, name.AttributeCnt())
@@ -191,7 +191,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "placemark name", name.Content())
 
 	// kml > Document > Folder > Placemark > description.
-	desc := pm.ChildByIdx(1)
+	desc := pm.ChildAtIdx(1)
 	assert.Exactly(t, ElemDescription, desc.LocalName())
 	assert.Exactly(t, int64(753), desc.Offset())
 	assert.Exactly(t, 0, desc.AttributeCnt())
@@ -199,7 +199,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "<b>placemark description</b>", desc.Content())
 
 	// kml > Document > Folder > Placemark > styleUrl.
-	styleUrl := pm.ChildByIdx(2)
+	styleUrl := pm.ChildAtIdx(2)
 	assert.Exactly(t, ElemStyleURL, styleUrl.LocalName())
 	assert.Exactly(t, int64(829), styleUrl.Offset())
 	assert.Exactly(t, 0, styleUrl.AttributeCnt())
@@ -207,7 +207,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "#sty_0", styleUrl.Content())
 
 	// kml > Document > Folder > Placemark > MultiGeometry.
-	mg := pm.ChildByIdx(3)
+	mg := pm.ChildAtIdx(3)
 	assert.Exactly(t, ElemMultiGeometry, mg.LocalName())
 	assert.Exactly(t, int64(865), mg.Offset())
 	assert.Exactly(t, 0, mg.AttributeCnt())
@@ -215,7 +215,7 @@ func Test_Parse(t *testing.T) {
 	assert.True(t, mg.HasChild(ElemLineString))
 
 	// kml > Document > Folder > Placemark > MultiGeometry > LineString.
-	linStr := mg.ChildByIdx(0)
+	linStr := mg.ChildAtIdx(0)
 	assert.Exactly(t, ElemLineString, linStr.LocalName())
 	assert.Exactly(t, int64(891), linStr.Offset())
 	assert.Exactly(t, 0, linStr.AttributeCnt())
@@ -224,7 +224,7 @@ func Test_Parse(t *testing.T) {
 	assert.True(t, linStr.HasChild(ElemCoordinates))
 
 	// kml > Document > Folder > Placemark > MultiGeometry > LineString > tessellate.
-	ts := linStr.ChildByIdx(0)
+	ts := linStr.ChildAtIdx(0)
 	assert.Exactly(t, ElemTessellate, ts.LocalName())
 	assert.Exactly(t, int64(916), ts.Offset())
 	assert.Exactly(t, 0, ts.AttributeCnt())
@@ -232,7 +232,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, "1", ts.Content())
 
 	// kml > Document > Folder > Placemark > MultiGeometry > LineString > coordinates.
-	cor := linStr.ChildByIdx(1)
+	cor := linStr.ChildAtIdx(1)
 	assert.Exactly(t, ElemCoordinates, cor.LocalName())
 	assert.Exactly(t, int64(955), cor.Offset())
 	assert.Exactly(t, 0, cor.AttributeCnt())

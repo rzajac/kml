@@ -98,16 +98,17 @@ func (e *Element) ChildCnt() int {
 	return len(e.children)
 }
 
-// ChildByIdx returns child element at idx. Returns nil if index is out of bounds.
-func (e *Element) ChildByIdx(idx int) *Element {
-	if idx >= len(e.children) || idx < 0 {
+// ChildAtIdx returns child element at index. Returns nil if index is out of
+// bounds.
+func (e *Element) ChildAtIdx(index int) *Element {
+	if index >= len(e.children) || index < 0 {
 		return nil
 	}
-	return e.children[idx]
+	return e.children[index]
 }
 
-// ChildByName returns child element by local name. Returns nil if child does
-// not exist.
+// ChildByName returns first child element by local name. Returns nil if
+// child with local name does not exist.
 func (e *Element) ChildByName(name string) *Element {
 	for _, ch := range e.children {
 		if ch.se.Name.Local == name {
@@ -115,11 +116,6 @@ func (e *Element) ChildByName(name string) *Element {
 		}
 	}
 	return nil
-}
-
-// Children returns element's children.
-func (e *Element) Children() []*Element {
-	return e.children
 }
 
 // AddChild adds child element(s) to the element.
@@ -135,6 +131,39 @@ func (e *Element) AddChild(els ...interface{}) error {
 		}
 	}
 	return nil
+}
+
+// PrependChild prepends one or more child elements.
+func (e *Element) PrependChild(els ...interface{}) error {
+	p := len(els)
+	if p == 0 {
+		return nil
+	}
+	l := len(e.children)
+	tmp := make([]*Element, l+p)
+	copy(tmp[p:], e.children)
+	e.children = tmp[:0]
+	if err := e.AddChild(els...); err != nil {
+		e.children = tmp[p:]
+		return err
+	}
+	e.children = tmp
+	return nil
+}
+
+// RemoveChildren removes all child elements.
+func (e *Element) RemoveChildren() {
+	e.children = nil
+}
+
+// RemoveChildAtIdx removes child element at index.
+func (e *Element) RemoveChildAtIdx(index int) *Element {
+	elm := e.ChildAtIdx(index)
+	if elm == nil {
+		return nil
+	}
+	e.children = append(e.children[:index], e.children[index+1:]...)
+	return elm
 }
 
 // Content returns element's string content. It returns empty string if

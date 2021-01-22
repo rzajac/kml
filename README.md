@@ -25,10 +25,10 @@ err := xml.Unmarshal(data, root)
 checkErr(err)
 
 // Explore. See documentation for available methods. 
-id := k.ChildByIdx(0).Attribute("id").Value
+id := k.ChildAtIdx(0).Attribute("id").Value
 
 // Edit.
-root.ChildByIdx(0).ChildByIdx(2).ChildByIdx(0).SetContent("new value")
+root.ChildAtIdx(0).ChildAtIdx(2).ChildAtIdx(0).SetContent("new value")
 
 // Marshal.
 data, err := xml.Marshal(root)
