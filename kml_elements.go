@@ -9,6 +9,7 @@ import (
 
 // KML element names.
 const (
+	ElemAltitude      = "altitude"
 	ElemAltitudeMode  = "altitudeMode"
 	ElemBalloonStyle  = "BalloonStyle"
 	ElemBgColor       = "bgColor"
@@ -50,6 +51,11 @@ const (
 )
 
 // ----------------------------------- A ---------------------------------------
+
+// Altitude returns new Altitude element.
+func Altitude(value float64, xes ...interface{}) *Element {
+	return FloatElement(ElemAltitude, value, xes...)
+}
 
 // AltitudeMode mode valid values.
 const (

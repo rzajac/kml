@@ -16,6 +16,7 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		elm *kml.Element
 		exp string
 	}{
+		{kml.Altitude(1.234), `<altitude>1.234</altitude>`},
 		{kml.BalloonStyle(), `<BalloonStyle></BalloonStyle>`},
 		{kml.BgColor("ffffffff"), `<bgColor>ffffffff</bgColor>`},
 		{kml.Camera(), `<camera></camera>`},
