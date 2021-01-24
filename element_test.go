@@ -173,3 +173,19 @@ func Test_Element_RemoveChildAtIdx_NotExisting(t *testing.T) {
 	exp := `<Document><name>name</name><Folder id="f1"></Folder></Document>`
 	assert.Exactly(t, exp, string(data))
 }
+
+func Test_Element_ChildByID(t *testing.T) {
+	// --- Given ---
+	doc := Document(
+		Name("name"),
+		Folder(AttrID("f1")),
+		Folder(AttrID("f2")),
+	)
+
+	// --- When ---
+	ch := doc.ChildByID("f2")
+
+	// --- Then ---
+	require.NotNil(t, ch)
+	assert.Exactly(t, "f2", ch.ID())
+}

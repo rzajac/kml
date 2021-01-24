@@ -38,6 +38,12 @@ func NewElement(name string, els ...interface{}) *Element {
 	return xel
 }
 
+// ID returns id attribute value for the element. Returns empty string if id
+// attribute does not exist.
+func (e *Element) ID() string {
+	return e.Attribute("id").Value
+}
+
 // LocalName returns XML element name.
 func (e *Element) LocalName() string {
 	return e.se.Name.Local
@@ -108,10 +114,20 @@ func (e *Element) ChildAtIdx(index int) *Element {
 }
 
 // ChildByName returns first child element by local name. Returns nil if
-// child with local name does not exist.
+// child does not exist.
 func (e *Element) ChildByName(name string) *Element {
 	for _, ch := range e.children {
 		if ch.se.Name.Local == name {
+			return ch
+		}
+	}
+	return nil
+}
+
+// ChildByID returns first child element with ID. Returns nil if does not exist.
+func (e *Element) ChildByID(id string) *Element {
+	for _, ch := range e.children {
+		if ch.Attribute("id").Value == id {
 			return ch
 		}
 	}
