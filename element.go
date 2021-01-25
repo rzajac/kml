@@ -127,7 +127,7 @@ func (e *Element) ChildByName(name string) *Element {
 // ChildByID returns first child element with ID. Returns nil if does not exist.
 func (e *Element) ChildByID(id string) *Element {
 	for _, ch := range e.children {
-		if ch.Attribute("id").Value == id {
+		if ch.ID() == id {
 			return ch
 		}
 	}

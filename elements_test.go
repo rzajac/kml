@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 
@@ -28,6 +29,9 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		{kml.Document(), `<Document></Document>`},
 		{kml.ExtendedData(), `<ExtendedData></ExtendedData>`},
 		{kml.Folder(), `<Folder></Folder>`},
+		{kml.GxOption("sunlight", true), `<gx:option name="sunlight" enabled="1"></gx:option>`},
+		{kml.GxTimeStamp(time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC)), `<gx:TimeStamp><when>2020-01-01T00:00:00Z</when></gx:TimeStamp>`},
+		{kml.GxViewerOptions(), `<gx:ViewerOptions></gx:ViewerOptions>`},
 		{kml.Heading(1.234), `<heading>1.234</heading>`},
 		{kml.LabelStyle(), `<LabelStyle></LabelStyle>`},
 		{kml.Latitude(1.234), `<latitude>1.234</latitude>`},

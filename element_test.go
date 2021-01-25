@@ -38,7 +38,7 @@ func Test_Element_ChildByName(t *testing.T) {
 	fld := root.ChildAtIdx(0).ChildByName(ElemFolder)
 
 	// --- Then ---
-	assert.Exactly(t, "fld_0", fld.Attribute("id").Value)
+	assert.Exactly(t, "fld_0", fld.ID())
 }
 
 func Test_Element_ChildByName_notExisting(t *testing.T) {

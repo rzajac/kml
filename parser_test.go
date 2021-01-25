@@ -67,7 +67,7 @@ func Test_Parse(t *testing.T) {
 	assert.True(t, style.HasChild(ElemLineStyle))
 	assert.True(t, style.HasChild(ElemPolyStyle))
 
-	assert.Exactly(t, "sty_0", style.Attribute("id").Value)
+	assert.Exactly(t, "sty_0", style.ID())
 
 	// kml > Document > Style > LabelStyle.
 	labSty := style.ChildAtIdx(0)
@@ -154,7 +154,7 @@ func Test_Parse(t *testing.T) {
 	assert.True(t, folder.HasChild(ElemSnippet))
 	assert.True(t, folder.HasChild(ElemPlacemark))
 
-	assert.Exactly(t, "fld_0", folder.Attribute("id").Value)
+	assert.Exactly(t, "fld_0", folder.ID())
 
 	// kml > Document > Folder > name.
 	name = folder.ChildAtIdx(0)
@@ -179,7 +179,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, ElemPlacemark, pm.LocalName())
 	assert.Exactly(t, int64(687), pm.Offset())
 	assert.Exactly(t, 1, pm.AttributeCnt())
-	assert.Exactly(t, "pm_0", pm.Attribute("id").Value)
+	assert.Exactly(t, "pm_0", pm.ID())
 	assert.Exactly(t, 4, pm.ChildCnt())
 
 	// kml > Document > Folder > Placemark > name.
@@ -218,7 +218,8 @@ func Test_Parse(t *testing.T) {
 	linStr := mg.ChildAtIdx(0)
 	assert.Exactly(t, ElemLineString, linStr.LocalName())
 	assert.Exactly(t, int64(891), linStr.Offset())
-	assert.Exactly(t, 0, linStr.AttributeCnt())
+	assert.Exactly(t, 1, linStr.AttributeCnt())
+	assert.Exactly(t, "ls_0", linStr.ID())
 	assert.Exactly(t, 2, linStr.ChildCnt())
 	assert.True(t, linStr.HasChild(ElemTessellate))
 	assert.True(t, linStr.HasChild(ElemCoordinates))
@@ -226,7 +227,7 @@ func Test_Parse(t *testing.T) {
 	// kml > Document > Folder > Placemark > MultiGeometry > LineString > tessellate.
 	ts := linStr.ChildAtIdx(0)
 	assert.Exactly(t, ElemTessellate, ts.LocalName())
-	assert.Exactly(t, int64(916), ts.Offset())
+	assert.Exactly(t, int64(926), ts.Offset())
 	assert.Exactly(t, 0, ts.AttributeCnt())
 	assert.Exactly(t, 0, ts.ChildCnt())
 	assert.Exactly(t, "1", ts.Content())
@@ -234,7 +235,7 @@ func Test_Parse(t *testing.T) {
 	// kml > Document > Folder > Placemark > MultiGeometry > LineString > coordinates.
 	cor := linStr.ChildAtIdx(1)
 	assert.Exactly(t, ElemCoordinates, cor.LocalName())
-	assert.Exactly(t, int64(955), cor.Offset())
+	assert.Exactly(t, int64(965), cor.Offset())
 	assert.Exactly(t, 0, cor.AttributeCnt())
 	assert.Exactly(t, 0, cor.ChildCnt())
 	assert.Exactly(t, "0.1,0.2,0.3 1.1,1.2,1.3", cor.Content())

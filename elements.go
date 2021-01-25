@@ -3,51 +3,55 @@ package kml
 import (
 	"encoding/xml"
 	"strconv"
+	"time"
 )
 
 // Reference: https://developers.google.com/kml/documentation/kmlreference
 
 // KML element names.
 const (
-	ElemAltitude      = "altitude"
-	ElemAltitudeMode  = "altitudeMode"
-	ElemBalloonStyle  = "BalloonStyle"
-	ElemBgColor       = "bgColor"
-	ElemCamera        = "Camera"
-	ElemColor         = "color"
-	ElemCoordinates   = "coordinates"
-	ElemData          = "data"
-	ElemDescription   = "description"
-	ElemDisplayMode   = "displayMode"
-	ElemDisplayName   = "displayName"
-	ElemDocument      = "Document"
-	ElemExtendedData  = "ExtendedData"
-	ElemFolder        = "Folder"
-	ElemHeading       = "heading"
-	ElemKML           = "kml"
-	ElemLabelStyle    = "LabelStyle"
-	ElemLatitude      = "latitude"
-	ElemLineStyle     = "LineStyle"
-	ElemLineString    = "LineString"
-	ElemLongitude     = "longitude"
-	ElemMultiGeometry = "MultiGeometry"
-	ElemName          = "name"
-	ElemOutline       = "outline"
-	ElemPlacemark     = "Placemark"
-	ElemPolyStyle     = "PolyStyle"
-	ElemRoll          = "roll"
-	ElemScale         = "scale"
-	ElemSchema        = "Schema"
-	ElemSchemaData    = "SchemaData"
-	ElemSimpleData    = "SimpleData"
-	ElemSimpleField   = "SimpleField"
-	ElemSnippet       = "Snippet"
-	ElemStyle         = "Style"
-	ElemStyleURL      = "styleUrl"
-	ElemTessellate    = "tessellate"
-	ElemText          = "text"
-	ElemTilt          = "tilt"
-	ElemWidth         = "width"
+	ElemAltitude        = "altitude"
+	ElemAltitudeMode    = "altitudeMode"
+	ElemBalloonStyle    = "BalloonStyle"
+	ElemBgColor         = "bgColor"
+	ElemCamera          = "Camera"
+	ElemColor           = "color"
+	ElemCoordinates     = "coordinates"
+	ElemData            = "data"
+	ElemDescription     = "description"
+	ElemDisplayMode     = "displayMode"
+	ElemDisplayName     = "displayName"
+	ElemDocument        = "Document"
+	ElemExtendedData    = "ExtendedData"
+	ElemFolder          = "Folder"
+	ElemGxTimeStamp     = "gx:TimeStamp"
+	ElemGxViewerOptions = "gx:ViewerOptions"
+	ElemGxOption        = "gx:option"
+	ElemHeading         = "heading"
+	ElemKML             = "kml"
+	ElemLabelStyle      = "LabelStyle"
+	ElemLatitude        = "latitude"
+	ElemLineStyle       = "LineStyle"
+	ElemLineString      = "LineString"
+	ElemLongitude       = "longitude"
+	ElemMultiGeometry   = "MultiGeometry"
+	ElemName            = "name"
+	ElemOutline         = "outline"
+	ElemPlacemark       = "Placemark"
+	ElemPolyStyle       = "PolyStyle"
+	ElemRoll            = "roll"
+	ElemScale           = "scale"
+	ElemSchema          = "Schema"
+	ElemSchemaData      = "SchemaData"
+	ElemSimpleData      = "SimpleData"
+	ElemSimpleField     = "SimpleField"
+	ElemSnippet         = "Snippet"
+	ElemStyle           = "Style"
+	ElemStyleURL        = "styleUrl"
+	ElemTessellate      = "tessellate"
+	ElemText            = "text"
+	ElemTilt            = "tilt"
+	ElemWidth           = "width"
 )
 
 // ----------------------------------- A ---------------------------------------
@@ -152,6 +156,29 @@ func Folder(xes ...interface{}) *Element {
 }
 
 // ----------------------------------- G ---------------------------------------
+
+// GxOption returns new gx:options element.
+func GxOption(name string, enabled bool) *Element {
+	return NewElement(
+		ElemGxOption,
+		Attr("name", name),
+		AttrBool("enabled", enabled),
+	)
+}
+
+// GxTimeStamp returns new gx:TimeStamp element.
+func GxTimeStamp(when time.Time, xes ...interface{}) *Element {
+	return NewElement(
+		ElemGxTimeStamp,
+		StringElement("when", when.Format(time.RFC3339), xes...),
+	)
+}
+
+// GxViewerOptions returns new gx:ViewerOptions element.
+func GxViewerOptions(xes ...interface{}) *Element {
+	return NewElement(ElemGxViewerOptions, xes...)
+}
+
 // ----------------------------------- H ---------------------------------------
 
 // Heading returns new heading element.
