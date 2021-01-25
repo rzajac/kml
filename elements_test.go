@@ -49,7 +49,7 @@ func Test_InPlaceElement_Rendering(t *testing.T) {
 		{kml.SimpleData("name", "value"), `<SimpleData name="name">value</SimpleData>`},
 		{kml.SimpleField(kml.SFTypeString, "name"), `<SimpleField type="string" name="name"></SimpleField>`},
 		{kml.Snippet("value"), `<Snippet>value</Snippet>`},
-		{kml.Style(), `<Style></Style>`},
+		{kml.Style("sty_id"), `<Style id="sty_id"></Style>`},
 		{kml.StyleURL("#value"), `<styleUrl>#value</styleUrl>`},
 		{kml.Tessellate(false), `<tessellate>0</tessellate>`},
 		{kml.Text("value"), `<text>value</text>`},
@@ -280,7 +280,7 @@ func ExampleKML() {
 		kml.Document(
 			kml.Name("document name"),
 			kml.Style(
-				kml.AttrID("sty_0"),
+				"sty_0",
 				kml.LabelStyle(
 					kml.Color("01020304"),
 					kml.Scale(1),

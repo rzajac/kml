@@ -353,8 +353,14 @@ func Snippet(value string, xes ...interface{}) *Element {
 }
 
 // Style returns new Style element.
-func Style(xes ...interface{}) *Element {
-	return NewElement(ElemStyle, xes...)
+func Style(id string, xes ...interface{}) *Element {
+	attrs := []interface{}{
+		AttrID(id),
+	}
+	return NewElement(
+		ElemStyle,
+		append(attrs, xes...)...,
+	)
 }
 
 // StyleURL returns new styleURL element.
