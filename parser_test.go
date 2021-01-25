@@ -55,7 +55,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(230), name.Offset())
 	assert.Exactly(t, 0, name.AttributeCnt())
 	assert.Exactly(t, 0, name.ChildCnt())
-	assert.Exactly(t, "document name", name.Content())
+	assert.Exactly(t, []byte("document name"), name.Content())
 
 	// kml > Document > Style.
 	style := doc.ChildAtIdx(1)
@@ -84,7 +84,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(307), color.Offset())
 	assert.Exactly(t, 0, color.AttributeCnt())
 	assert.Exactly(t, 0, color.ChildCnt())
-	assert.Exactly(t, "01020304", color.Content())
+	assert.Exactly(t, []byte("01020304"), color.Content())
 
 	// kml > Document > Style > LabelStyle > scale.
 	scale := labSty.ChildAtIdx(1)
@@ -92,7 +92,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(339), scale.Offset())
 	assert.Exactly(t, 0, scale.AttributeCnt())
 	assert.Exactly(t, 0, scale.ChildCnt())
-	assert.Exactly(t, "1", scale.Content())
+	assert.Exactly(t, []byte("1"), scale.Content())
 
 	// kml > Document > Style > LineStyle.
 	linSty := style.ChildAtIdx(1)
@@ -109,7 +109,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(382), linSty.Offset())
 	assert.Exactly(t, 0, color.AttributeCnt())
 	assert.Exactly(t, 0, color.ChildCnt())
-	assert.Exactly(t, "05060708", color.Content())
+	assert.Exactly(t, []byte("05060708"), color.Content())
 
 	// kml > Document > Style > LineStyle > width.
 	width := linSty.ChildAtIdx(1)
@@ -117,7 +117,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(434), width.Offset())
 	assert.Exactly(t, 0, width.AttributeCnt())
 	assert.Exactly(t, 0, width.ChildCnt())
-	assert.Exactly(t, "3.5", width.Content())
+	assert.Exactly(t, []byte("3.5"), width.Content())
 
 	// kml > Document > Style > PolyStyle.
 	polSty := style.ChildAtIdx(2)
@@ -134,7 +134,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(498), color.Offset())
 	assert.Exactly(t, 0, color.AttributeCnt())
 	assert.Exactly(t, 0, color.ChildCnt())
-	assert.Exactly(t, "090a0b0c", color.Content())
+	assert.Exactly(t, []byte("090a0b0c"), color.Content())
 
 	// kml > Document > Style > PolyStyle > outline.
 	outline := polSty.ChildAtIdx(1)
@@ -142,7 +142,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(530), outline.Offset())
 	assert.Exactly(t, 0, outline.AttributeCnt())
 	assert.Exactly(t, 0, outline.ChildCnt())
-	assert.Exactly(t, "1", outline.Content())
+	assert.Exactly(t, []byte("1"), outline.Content())
 
 	// kml > Document > Folder.
 	folder := doc.ChildAtIdx(2)
@@ -162,7 +162,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(613), name.Offset())
 	assert.Exactly(t, 0, name.AttributeCnt())
 	assert.Exactly(t, 0, name.ChildCnt())
-	assert.Exactly(t, "folder name", name.Content())
+	assert.Exactly(t, []byte("folder name"), name.Content())
 
 	// kml > Document > Folder > Snippet.
 	snippet := folder.ChildAtIdx(1)
@@ -170,7 +170,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(644), snippet.Offset())
 	assert.Exactly(t, 1, snippet.AttributeCnt())
 	assert.Exactly(t, 0, snippet.ChildCnt())
-	assert.Exactly(t, "snip", snippet.Content())
+	assert.Exactly(t, []byte("snip"), snippet.Content())
 
 	assert.Exactly(t, "1", snippet.Attribute("maxLines").Value)
 
@@ -188,7 +188,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(717), name.Offset())
 	assert.Exactly(t, 0, name.AttributeCnt())
 	assert.Exactly(t, 0, name.ChildCnt())
-	assert.Exactly(t, "placemark name", name.Content())
+	assert.Exactly(t, []byte("placemark name"), name.Content())
 
 	// kml > Document > Folder > Placemark > description.
 	desc := pm.ChildAtIdx(1)
@@ -196,7 +196,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(753), desc.Offset())
 	assert.Exactly(t, 0, desc.AttributeCnt())
 	assert.Exactly(t, 0, desc.ChildCnt())
-	assert.Exactly(t, "<b>placemark description</b>", desc.Content())
+	assert.Exactly(t, []byte("<b>placemark description</b>"), desc.Content())
 
 	// kml > Document > Folder > Placemark > styleUrl.
 	styleUrl := pm.ChildAtIdx(2)
@@ -204,7 +204,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(829), styleUrl.Offset())
 	assert.Exactly(t, 0, styleUrl.AttributeCnt())
 	assert.Exactly(t, 0, styleUrl.ChildCnt())
-	assert.Exactly(t, "#sty_0", styleUrl.Content())
+	assert.Exactly(t, []byte("#sty_0"), styleUrl.Content())
 
 	// kml > Document > Folder > Placemark > MultiGeometry.
 	mg := pm.ChildAtIdx(3)
@@ -230,7 +230,7 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(926), ts.Offset())
 	assert.Exactly(t, 0, ts.AttributeCnt())
 	assert.Exactly(t, 0, ts.ChildCnt())
-	assert.Exactly(t, "1", ts.Content())
+	assert.Exactly(t, []byte("1"), ts.Content())
 
 	// kml > Document > Folder > Placemark > MultiGeometry > LineString > coordinates.
 	cor := linStr.ChildAtIdx(1)
@@ -238,5 +238,5 @@ func Test_Parse(t *testing.T) {
 	assert.Exactly(t, int64(965), cor.Offset())
 	assert.Exactly(t, 0, cor.AttributeCnt())
 	assert.Exactly(t, 0, cor.ChildCnt())
-	assert.Exactly(t, "0.1,0.2,0.3 1.1,1.2,1.3", cor.Content())
+	assert.Exactly(t, []byte("0.1,0.2,0.3 1.1,1.2,1.3"), cor.Content())
 }
