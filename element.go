@@ -189,6 +189,13 @@ func (e *Element) Content() []byte {
 	return e.content
 }
 
+// ContentString returns element's content as string. It returns empty string
+// if element's content is empty or if element is a container for other
+// elements.
+func (e *Element) ContentString() string {
+	return string(e.content)
+}
+
 // SetContent sets element's content. It will not set the content if the
 // element is a container for other elements (has one or more child elements).
 func (e *Element) SetContent(content []byte) {
